@@ -6,7 +6,6 @@ from .models import Event, RSVP, Review
 from .serializers import EventSerializer, RSVPSerializer, ReviewSerializer
 from .permissions import IsOrganizerOrReadOnly, IsInvitedToPrivateEvent, IsOwnerOrReadOnly
 
-
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
