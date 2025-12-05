@@ -2,10 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 *.so
-
 .Python
+venv/
+env/
+ENV/
+.venv
 build/
 develop-eggs/
 dist/
@@ -22,22 +24,15 @@ wheels/
 .installed.cfg
 *.egg
 
-venv/
-env/
-ENV/
-.venv
-
+# Database
 db.sqlite3
 db.sqlite3-journal
-
 *.log
 
 .env
 .env.local
-
 /static/
 /media/
-
 .DS_Store
 .vscode/
 .idea/

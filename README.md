@@ -14,13 +14,6 @@ A Django REST Framework–based API for managing events, RSVPs, and reviews. Use
 
 ---
 
-## Sample Superuser (Demo)
-
-- **Username:** `admin_001`  
-- **Password:** `admin_002`  
-
----
-
 ## Models
 
 ### UserProfile
