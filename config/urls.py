@@ -19,26 +19,41 @@ URL configuration for config project.
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.http import JsonResponse
+
+
+def api_root(request):
+    return JsonResponse({
+        'message': 'Welcome to Event Management API',
+        'version': '1.0',
+        'endpoints': {
+            'admin': '/admin/',
+            'api': {
+                'events': '/api/events/',
+                'token': '/api/token/',
+                'token_refresh': '/api/token/refresh/',
+            },
+            'documentation': {
+                'events_list': 'GET /api/events/ - List all events',
+                'events_create': 'POST /api/events/ - Create event (auth required)',
+                'events_detail': 'GET /api/events/{id}/ - Get event details',
+                'events_update': 'PUT/PATCH /api/events/{id}/ - Update event (organizer only)',
+                'events_delete': 'DELETE /api/events/{id}/ - Delete event (organizer only)',
+                'rsvp_create': 'POST /api/events/{id}/rsvp/ - RSVP to event',
+                'rsvp_list': 'GET /api/events/{id}/rsvp/ - List RSVPs',
+                'rsvp_update': 'PATCH /api/events/{id}/rsvp/{rsvp_id}/ - Update RSVP',
+                'reviews_create': 'POST /api/events/{id}/reviews/ - Add review',
+                'reviews_list': 'GET /api/events/{id}/reviews/ - List reviews',
+            }
+        }
+    })
+
 
 urlpatterns = [
+    path('', api_root, name='api-root'),
     path('admin/', admin.site.urls),
-    
-    # JWT Authentication endpoints
+    path('api/', include('events.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    
-    # Events app endpoints
-    path('api/', include('events.urls')),
 ]
-
-# Serve media files in development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
