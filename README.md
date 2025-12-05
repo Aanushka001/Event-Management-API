@@ -1,115 +1,120 @@
-Here’s your README cleaned up with icons added for better visual appeal and the **License** and comments removed as requested:
-
-````markdown
-# 🎉 Event Management API
+# Event Management API
 
 A Django REST Framework–based API for managing events, RSVPs, and reviews. Users can create events, RSVP to events, and leave reviews for events they have attended.
 
-Below is a visual preview of key screens:
+## Visual Preview of Key Screens
 
-![Admin](./event_management_api/Photos/Admin.png)
-![Dashboard](./event_management_api/Photos/Dashboard.png)
-![Events](./event_management_api/Photos/Events.png)
-![Home](./event_management_api/Photos/Home.png)
-![Users](./event_management_api/Photos/Users.png)
-
----
-
-## ✨ Features
-
-* 🔑 JWT-based authentication
-* 🗓️ Create, update, and delete events
-* ✅ RSVP management with status tracking
-* ⭐ Event reviews with ratings
-* 🔒 Private and public events
-* 🛡️ Permission-based access control
-* 🔍 Search, filter, and pagination support
+![Admin](./Photos/Admin.png)  
+![Dashboard](./Photos/Dashboard.png)  
+![Events](./Photos/Events.png)  
+![Home](./Photos/Home.png)  
+![Users](./Photos/Users.png)  
 
 ---
 
-## 👤 Sample Superuser Credentials (for demo)
+## Features
 
-**username:** `admin_001`  
-**password:** `admin_002`
+- JWT-based authentication  
+- Create, update, and delete events  
+- RSVP management with status tracking  
+- Event reviews with ratings  
+- Private and public events  
+- Permission-based access control  
+- Search, filter, and pagination support  
 
 ---
 
-## 🏗️ Models
+## Sample Superuser Credentials (for demo)
+
+**Username:** `admin_001`  
+**Password:** `admin_002`  
+
+---
+
+## Models
 
 ### UserProfile
 Extends Django's built-in User model with additional fields:
 
-* 🧑 full_name
-* 💬 bio
-* 📍 location
-* 🖼️ profile_picture
+- full_name  
+- bio  
+- location  
+- profile_picture  
 
 ### Event
 
-* 📝 title
-* 📝 description
-* 👤 organizer (ForeignKey to User)
-* 📍 location
-* ⏰ start_time
-* ⏰ end_time
-* 🔓 is_public (Boolean)
-* 📅 created_at
-* 📅 updated_at
+- title  
+- description  
+- organizer (ForeignKey to User)  
+- location  
+- start_time  
+- end_time  
+- is_public (Boolean)  
+- created_at  
+- updated_at  
 
 ### RSVP
 
-* 🗓️ event (ForeignKey to Event)
-* 👤 user (ForeignKey to User)
-* ✅ status (Going / Maybe / Not Going)
+- event (ForeignKey to Event)  
+- user (ForeignKey to User)  
+- status (Going / Maybe / Not Going)  
 
 ### Review
 
-* 🗓️ event (ForeignKey to Event)
-* 👤 user (ForeignKey to User)
-* ⭐ rating (1–5)
-* 💬 comment
-* 📅 created_at
+- event (ForeignKey to Event)  
+- user (ForeignKey to User)  
+- rating (1–5)  
+- comment  
+- created_at  
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
-### 🔐 Authentication
+### Authentication
 
-* `POST /api/token/` — Obtain JWT token  
-* `POST /api/token/refresh/` — Refresh JWT token
+| Method | Endpoint           | Description            |
+|--------|------------------|------------------------|
+| POST   | `/api/token/`     | Obtain JWT token       |
+| POST   | `/api/token/refresh/` | Refresh JWT token   |
 
-### 🗓️ Events
+### Events
 
-* `GET /api/events/` — List all public events (paginated)  
-* `POST /api/events/` — Create new event (authenticated)  
-* `GET /api/events/{id}/` — Event details  
-* `PUT /api/events/{id}/` — Update event (organizer only)  
-* `PATCH /api/events/{id}/` — Partial update (organizer only)  
-* `DELETE /api/events/{id}/` — Delete event (organizer only)
+| Method | Endpoint                 | Description                 |
+|--------|--------------------------|-----------------------------|
+| GET    | `/api/events/`           | List all public events (paginated) |
+| POST   | `/api/events/`           | Create new event (authenticated) |
+| GET    | `/api/events/{id}/`      | Event details              |
+| PUT    | `/api/events/{id}/`      | Update event (organizer only) |
+| PATCH  | `/api/events/{id}/`      | Partial update (organizer only) |
+| DELETE | `/api/events/{id}/`      | Delete event (organizer only) |
 
-### ✅ RSVP
+### RSVP
 
-* `POST /api/events/{event_id}/rsvp/` — RSVP to an event  
-* `GET /api/events/{event_id}/rsvp/` — List RSVPs for an event  
-* `PATCH /api/events/{event_id}/rsvp/{pk}/` — Update RSVP status
+| Method | Endpoint                          | Description             |
+|--------|----------------------------------|-------------------------|
+| POST   | `/api/events/{event_id}/rsvp/`   | RSVP to an event        |
+| GET    | `/api/events/{event_id}/rsvp/`   | List RSVPs for an event |
+| PATCH  | `/api/events/{event_id}/rsvp/{pk}/` | Update RSVP status |
 
-### ⭐ Reviews
+### Reviews
 
-* `POST /api/events/{event_id}/reviews/` — Add a review  
-* `GET /api/events/{event_id}/reviews/` — List reviews for an event
+| Method | Endpoint                            | Description           |
+|--------|------------------------------------|-----------------------|
+| POST   | `/api/events/{event_id}/reviews/`  | Add a review          |
+| GET    | `/api/events/{event_id}/reviews/`  | List reviews for an event |
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
-### 🛠️ Prerequisites
+### Prerequisites
 
-* Python 3.8+  
-* pip  
-* virtualenv (optional but recommended)
+- Python 3.8+  
+- pip  
+- virtualenv (optional but recommended)  
 
-### 📥 Installation
+### Installation
 
 ```bash
 git clone https://github.com/Aanushka001/Event-Management-API.git
@@ -152,9 +157,9 @@ API available at: `http://127.0.0.1:8000/`
 
 ---
 
-## 💻 Usage Examples
+## Usage Examples
 
-### 🔑 Obtain JWT Token
+### Obtain JWT Token
 
 ```bash
 curl -X POST http://127.0.0.1:8000/api/token/ \
@@ -162,7 +167,7 @@ curl -X POST http://127.0.0.1:8000/api/token/ \
   -d '{"username": "your_username", "password": "your_password"}'
 ```
 
-### 🗓️ Create an Event
+### Create an Event
 
 ```bash
 curl -X POST http://127.0.0.1:8000/api/events/ \
@@ -178,7 +183,7 @@ curl -X POST http://127.0.0.1:8000/api/events/ \
   }'
 ```
 
-### ✅ RSVP to an Event
+### RSVP to an Event
 
 ```bash
 curl -X POST http://127.0.0.1:8000/api/events/1/rsvp/ \
@@ -187,7 +192,7 @@ curl -X POST http://127.0.0.1:8000/api/events/1/rsvp/ \
   -d '{"status": "Going"}'
 ```
 
-### ⭐ Add a Review
+### Add a Review
 
 ```bash
 curl -X POST http://127.0.0.1:8000/api/events/1/reviews/ \
@@ -201,35 +206,35 @@ curl -X POST http://127.0.0.1:8000/api/events/1/reviews/ \
 
 ---
 
-## 🔍 Search & Filtering
+## Search & Filtering
 
 Search events:
 
-```bash
+```http
 GET /api/events/?search=tech
 ```
 
 Filter by location:
 
-```bash
+```http
 GET /api/events/?location=New York
 ```
 
 Filter by public/private:
 
-```bash
+```http
 GET /api/events/?is_public=true
 ```
 
 Order by start time:
 
-```bash
+```http
 GET /api/events/?ordering=start_time
 ```
 
 ---
 
-## 🛡️ Permissions
+## Permissions
 
 * **IsOrganizerOrReadOnly** — Only organizers can edit/delete their events
 * **IsInvitedToPrivateEvent** — Only invited users can access private events
@@ -237,7 +242,7 @@ GET /api/events/?ordering=start_time
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 python manage.py test
@@ -245,7 +250,7 @@ python manage.py test
 
 ---
 
-## 🔒 Security Notes
+## Security Notes
 
 * JWT authentication required for most endpoints
 * Private events accessible only to invited users
@@ -254,7 +259,7 @@ python manage.py test
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 * Django 5.2.9
 * Django REST Framework
