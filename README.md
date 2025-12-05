@@ -8,14 +8,14 @@ A Django REST Framework–based API for managing events, RSVPs, and reviews. Use
 
 ## 📸 Application Screenshots
 
-### Admin Panel
+### RSVP Panel
 <p align="center">
   <img src="Photos/Admin.png" alt="Admin Panel" width="80%">
   <br>
   <em>Administrator interface for managing the entire system</em>
 </p>
 
-### User Dashboard
+### AdminUser Dashboard
 <p align="center">
   <img src="Photos/Dashboard.png" alt="Dashboard" width="80%">
   <br>
@@ -29,7 +29,7 @@ A Django REST Framework–based API for managing events, RSVPs, and reviews. Use
   <em>Comprehensive events listing and management interface</em>
 </p>
 
-### Home Page
+### Events Page
 <p align="center">
   <img src="Photos/Home.png" alt="Home Page" width="80%">
   <br>
