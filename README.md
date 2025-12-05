@@ -22,12 +22,6 @@ A Django REST Framework–based API for managing events, RSVPs, and reviews. Use
   <em>User dashboard showing events, RSVPs, and statistics</em>
 </p>
 
-### Events Management
-<p align="center">
-  <img src="Photos/Events.png" alt="Events Management" width="80%">
-  <br>
-  <em>Comprehensive events listing and management interface</em>
-</p>
 
 ### Events Page
 <p align="center">
