@@ -12,7 +12,7 @@ A Django REST Framework–based API for managing events, RSVPs, and reviews. Use
 - Permission-based access control  
 - Search, filter, and pagination  
 
----
+---s
 
 ## Models
 
