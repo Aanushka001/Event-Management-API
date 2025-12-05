@@ -1,14 +1,22 @@
 # Event Management API
 
 A Django REST Framework–based API for managing events, RSVPs, and reviews. Users can create events, RSVP to events, and leave reviews for events they have attended.
+## Visual Preview of Key Screen
 
-## Visual Preview of Key Screens
-
-![Admin](./Photos/Admin.png)  
-![Dashboard](./Photos/Dashboard.png)  
-![Events](./Photos/Events.png)  
-![Home](./Photos/Home.png)  
-![Users](./Photos/Users.png)  
+<table>
+<tr>
+<td><img src="./Photos/Admin.png" alt="Admin" width="200"/></td>
+<td><img src="./Photos/Dashboard.png" alt="Dashboard" width="200"/></td>
+</tr>
+<tr>
+<td><img src="./Photos/Events.png" alt="Events" width="200"/></td>
+<td><img src="./Photos/Home.png" alt="Home" width="200"/></td>
+</tr>
+<tr>
+<td><img src="./Photos/Users.png" alt="Users" width="200"/></td>
+<td></td>
+</tr>
+</table>
 
 ---
 
