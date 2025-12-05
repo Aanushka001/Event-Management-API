@@ -5,15 +5,15 @@ A Django REST Framework–based API for managing events, RSVPs, and reviews. Use
 
 <table>
 <tr>
-<td><img src="./Photos/Admin.png" alt="Admin" width="200"/></td>
-<td><img src="./Photos/Dashboard.png" alt="Dashboard" width="200"/></td>
+<td><img src="./Photos/Admin.png" alt="Admin" width="120"/></td>
+<td><img src="./Photos/Dashboard.png" alt="Dashboard" width="120"/></td>
 </tr>
 <tr>
-<td><img src="./Photos/Events.png" alt="Events" width="200"/></td>
-<td><img src="./Photos/Home.png" alt="Home" width="200"/></td>
+<td><img src="./Photos/Events.png" alt="Events" width="120"/></td>
+<td><img src="./Photos/Home.png" alt="Home" width="120"/></td>
 </tr>
 <tr>
-<td><img src="./Photos/Users.png" alt="Users" width="200"/></td>
+<td><img src="./Photos/Users.png" alt="Users" width="120"/></td>
 <td></td>
 </tr>
 </table>
