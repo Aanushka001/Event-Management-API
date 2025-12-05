@@ -1,10 +1,12 @@
-from rest_framework import viewsets, permissions, filters
+from rest_framework import viewsets, status, serializers, permissions, filters
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 from .models import Event, RSVP, Review
 from .serializers import EventSerializer, RSVPSerializer, ReviewSerializer
 from .permissions import IsOrganizerOrReadOnly, IsInvitedToPrivateEvent, IsOwnerOrReadOnly
+
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
@@ -39,11 +41,52 @@ class RSVPViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         event_id = self.kwargs.get('event_id')
-        return RSVP.objects.filter(event_id=event_id)
+        if event_id:
+            return RSVP.objects.filter(event_id=event_id)
+        return RSVP.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         event_id = self.kwargs.get('event_id')
-        serializer.save(user=self.request.user, event_id=event_id)
+        
+        if not event_id:
+            raise serializers.ValidationError({"event": "Event ID is required."})
+        
+        try:
+            event = Event.objects.get(id=event_id)
+        except Event.DoesNotExist:
+            raise serializers.ValidationError({"event": "Event not found."})
+        
+        if RSVP.objects.filter(user=self.request.user, event=event).exists():
+            raise serializers.ValidationError(
+                {"detail": "You have already RSVP'd to this event."}
+            )
+        
+        serializer.save(user=self.request.user, event=event)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        
+        if 'status' not in request.data:
+            return Response(
+                {"detail": "Only status field can be updated."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        serializer = self.get_serializer(
+            instance, 
+            data={'status': request.data['status']}, 
+            partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
@@ -52,8 +95,18 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         event_id = self.kwargs.get('event_id')
-        return Review.objects.filter(event_id=event_id)
+        if event_id:
+            return Review.objects.filter(event_id=event_id)
+        return Review.objects.all()
 
     def perform_create(self, serializer):
         event_id = self.kwargs.get('event_id')
+        if not event_id:
+            raise serializers.ValidationError({"event": "Event ID is required."})
+        
+        if Review.objects.filter(user=self.request.user, event_id=event_id).exists():
+            raise serializers.ValidationError(
+                {"detail": "You have already reviewed this event."}
+            )
+        
         serializer.save(user=self.request.user, event_id=event_id)

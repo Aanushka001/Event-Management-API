@@ -11,13 +11,19 @@ class IsOrganizerOrReadOnly(permissions.BasePermission):
 
 class IsInvitedToPrivateEvent(permissions.BasePermission):
     def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+            
         event_id = view.kwargs.get('event_id')
         if event_id:
             try:
                 event = Event.objects.get(id=event_id)
-                if not event.is_public and request.user.is_authenticated:
-                    if request.user != event.organizer:
-                        return RSVP.objects.filter(event=event, user=request.user).exists()
+                if event.is_public:
+                    return True
+                if request.user.is_authenticated:
+                    return (request.user == event.organizer or 
+                           RSVP.objects.filter(event=event, user=request.user).exists())
+                return False
             except Event.DoesNotExist:
                 return False
         return True

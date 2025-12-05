@@ -2,9 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-
 class UserProfile(models.Model):
-    """Extended user profile with additional information"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     full_name = models.CharField(max_length=255)
     bio = models.TextField(blank=True, null=True)
@@ -19,9 +17,7 @@ class UserProfile(models.Model):
     class Meta:
         ordering = ['-created_at']
 
-
 class Event(models.Model):
-    """Event model for managing events"""
     title = models.CharField(max_length=255)
     description = models.TextField()
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organized_events')
@@ -50,9 +46,7 @@ class Event(models.Model):
         if self.end_time <= self.start_time:
             raise ValidationError('End time must be after start time.')
 
-
 class RSVP(models.Model):
-    """RSVP model for event attendance tracking"""
     STATUS_CHOICES = [
         ('going', 'Going'),
         ('maybe', 'Maybe'),
@@ -72,17 +66,13 @@ class RSVP(models.Model):
         verbose_name_plural = 'RSVPs'
 
     def __str__(self):
-        return f"{self.user.username} - {self.event.title} ({self.status})"
-
+        display_status = dict(self.STATUS_CHOICES).get(self.status, self.status)
+        return f"{self.user.username} - {self.event.title} ({display_status})"
 
 class Review(models.Model):
-    """Review model for event reviews"""
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
-    rating = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)],
-        help_text='Rating from 1 to 5'
-    )
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
