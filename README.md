@@ -3,6 +3,47 @@
 
 A Django REST Framework–based API for managing events, RSVPs, and reviews. Users can create events, RSVP, and leave reviews.
 
+
+---
+
+## 📸 Application Screenshots
+
+### Admin Panel
+<p align="center">
+  <img src="Photos/Admin.png" alt="Admin Panel" width="80%">
+  <br>
+  <em>Administrator interface for managing the entire system</em>
+</p>
+
+### User Dashboard
+<p align="center">
+  <img src="Photos/Dashboard.png" alt="Dashboard" width="80%">
+  <br>
+  <em>User dashboard showing events, RSVPs, and statistics</em>
+</p>
+
+### Events Management
+<p align="center">
+  <img src="Photos/Events.png" alt="Events Management" width="80%">
+  <br>
+  <em>Comprehensive events listing and management interface</em>
+</p>
+
+### Home Page
+<p align="center">
+  <img src="Photos/Home.png" alt="Home Page" width="80%">
+  <br>
+  <em>Landing page with event highlights and navigation</em>
+</p>
+
+### Users Management
+<p align="center">
+  <img src="Photos/Users.png" alt="Users Management" width="80%">
+  <br>
+  <em>User management panel for administrators</em>
+</p>
+
+---
 ## Features
 
 - JWT-based authentication  
